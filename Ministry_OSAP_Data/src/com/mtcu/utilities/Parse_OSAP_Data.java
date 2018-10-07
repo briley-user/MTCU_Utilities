@@ -59,6 +59,28 @@ public class Parse_OSAP_Data {
 		return dataFileRows;
 	}
 	
+	static void writeArrayToCSV(String[][] elementsToWrite, String output_filename) throws IOException {
+	
+	// This method will write a two dimensional array to a file with the passed filename
+	// This method will overwrite the existing file each time.
+	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter (new FileOutputStream(output_filename),"UTF-8"));	
+	FileWriter fw = null;
+	
+	fw = new FileWriter(output_filename);
+	bw = new BufferedWriter(fw);
+	bw.write(elementsToWrite[0][0]);
+	
+	if (bw !=null) {
+		bw.close();
+		}
+	if (fw !=null) {
+		fw.close();
+		}
+	}
+	
+	
+	
+	
     static void normalizeColumnsFromCSV(List<String> referenceList, int repeatingColumns ) throws IOException {
     	//Read the repeating columns and rows into an array.
     	
