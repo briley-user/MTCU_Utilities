@@ -147,7 +147,7 @@ public class Parse_OSAP_Data {
     	}
        System.out.println("Total Count: "+counter);		
        
-       writeArrayToCSV(normalizedData,"D:\\output.csv");
+       writeArrayToCSV(normalizedData,"output.csv");
     }
 	
 	static String[] getRowElementsFromCSV (BufferedReader br) throws IOException {
