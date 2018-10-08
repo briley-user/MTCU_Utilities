@@ -72,9 +72,14 @@ public class Parse_OSAP_Data {
 	for (int rows=0; rows<elementsToWrite.length; ++rows) {
 		
 		for (int cols=0;cols <elementsToWrite[0].length; ++cols) {
-			bw.write(elementsToWrite[rows][cols]+",");
+			if (cols == elementsToWrite[0].length-1) {
+				bw.write(elementsToWrite[rows][cols]); // no comma appended after the last element in row	
+			} else 
+			{
+			bw.write(elementsToWrite[rows][cols]+","); // add a comma after each element
+			}
 		}
-			bw.write("\n");
+			bw.write("\n"); //add a new line character to end of the row
 	}
 	
 	
@@ -143,7 +148,7 @@ public class Parse_OSAP_Data {
     			
     			System.out.print(normalizedData[x][y]+" ");
     		}
-    		System.out.println("");
+    		System.out.println(""); // 
     	}
        System.out.println("Total Count: "+counter);		
        
