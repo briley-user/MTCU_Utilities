@@ -68,7 +68,15 @@ public class Parse_OSAP_Data {
 	
 	fw = new FileWriter(output_filename);
 	bw = new BufferedWriter(fw);
-	bw.write(elementsToWrite[0][0]);
+	
+	for (int rows=0; rows<elementsToWrite.length; ++rows) {
+		
+		for (int cols=0;cols <elementsToWrite[0].length; ++cols) {
+			bw.write(elementsToWrite[rows][cols]+",");
+		}
+			bw.write("\n");
+	}
+	
 	
 	if (bw !=null) {
 		bw.close();
@@ -81,7 +89,7 @@ public class Parse_OSAP_Data {
 	
 	
 	
-    static void normalizeColumnsFromCSV(List<String> referenceList, int repeatingColumns ) throws IOException {
+    static void normalizeColumnsFromCSV(List<String> referenceList, int repeatingColumns ) throws IOException, FileNotFoundException{
     	//Read the repeating columns and rows into an array.
     	
     	int totalRowCount =getNumberofListElements(referenceList); //get total row count from original file
@@ -138,6 +146,8 @@ public class Parse_OSAP_Data {
     		System.out.println("");
     	}
        System.out.println("Total Count: "+counter);		
+       
+       writeArrayToCSV(normalizedData,"D:\\output.csv");
     }
 	
 	static String[] getRowElementsFromCSV (BufferedReader br) throws IOException {
