@@ -72,14 +72,15 @@ public class Parse_OSAP_Data {
 	for (int rows=0; rows<elementsToWrite.length; ++rows) {
 		
 		for (int cols=0;cols <elementsToWrite[0].length; ++cols) {
-			if (cols == elementsToWrite[0].length-1) {
-				bw.write(elementsToWrite[rows][cols]); // no comma appended after the last element in row	
+			if (cols == (elementsToWrite[0].length-1)) {
+				bw.write(elementsToWrite[rows][cols]+"\n"); // no comma appended after the last element in row	
 			} else 
+				
 			{
-			bw.write(elementsToWrite[rows][cols]+","); // add a comma after each element
+				bw.write(elementsToWrite[rows][cols]+","); // add a comma after each element
 			}
 		}
-			bw.write("\n"); //add a new line character to end of the row
+		
 	}
 	
 	
@@ -105,10 +106,11 @@ public class Parse_OSAP_Data {
     	String[] repeatingColumnHeaderList = new String[repeatingColumns]; // String Array containing the columns that will  be repeating
     	repeatingColumnHeaderList=getColumnFieldNames(referenceList); // get header row from the in memory data file table
     	
-    	// Rows = Take total rows from existing List and multiply it by the number of data columns to give the new list size
+    	// Rows = Take total rows minus 1 for header that will not repeat from existing List and multiply it by the number of data columns to give the new list size
+    	// Rows continued Add 1 additional row for the header
     	// Columns = Take the number of repeating columns defined by the user and two (2) 1 for the repeating field name and 1 for the data value
     	// All data will be stored as strings
-    	String[][] normalizedData = new String[totalRowCount*(dataColumnsCount-repeatingColumns)][repeatingColumns+2];
+    	String[][] normalizedData = new String[(totalRowCount-1)*(dataColumnsCount-repeatingColumns)+1][repeatingColumns+2];
     	
     	//need to store a row of headers just the initial columns that will repeat.
     	
@@ -151,6 +153,7 @@ public class Parse_OSAP_Data {
     		System.out.println(""); // 
     	}
        System.out.println("Total Count: "+counter);		
+       System.out.println("Total Rows: "+totalRowCount);
        
        writeArrayToCSV(normalizedData,"output.csv");
     }
@@ -186,8 +189,8 @@ public class Parse_OSAP_Data {
 	//	HeaderNames = 	readFromCSVIntoArray("2012-13 OSAP Data.csv");
 		//String RepeatedColumns[][] = getRepeatingColumnsFromCSV("2016-17 OSAP Data.csv",4);
 		normalizeColumnsFromCSV(HeaderNames,4);		
-		System.out.println("Number for Repeated Rows: " +getNumberofListElements(HeaderNames));
-		System.out.println("Number of Header Fields: "+getNumberofColumnsfromString(getColumnFieldNames(HeaderNames)));   
+		//System.out.println("Number for Repeated Rows: " +getNumberofListElements(HeaderNames));
+		//System.out.println("Number of Header Fields: "+getNumberofColumnsfromString(getColumnFieldNames(HeaderNames)));   
 		
 
 		
